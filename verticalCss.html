@@ -1,0 +1,480 @@
+<div class="body hentry">
+    <header>
+        <h1 class="post-title entry-title" style="margin-bottom: 1rem;">[번역] CSS 수직 가운데 정렬 (테이블 없이!) Vertical Centering with CSS</h1>
+                    <div class="c-sub-strong  u-margin-top  u-margin-bottom"><p>더글라스 헤리엇이 모든 브라우저에서 작동하는 CSS 수직 가운데 정렬 기법에 대해 설명한다. 2017년인 현재는 flexbox를 이용할 수도 있지만, 여기서 설명하는 기법들은 여전히 유효하다. IE 구버전에 관한 부분만 제거하고 읽으면 된다.</p>
+</div>
+            </header>
+    <div class="post-meta">
+        <span class="author vcard"><span class="fn">안형우</span></span>
+        <small>|</small>
+        <time class="published" datetime="2013-03-25 01:03:22+0900">2013-03-25</time> 작성
+                    <small>|</small> <time class="updated" datetime="2023-03-30 15:03:32+0900">2023-03-30</time> 수정
+                            <small>|</small> 카테고리: <a href="https://mytory.net/archives/category/frontend/css" rel="category tag">css</a>, <a href="https://mytory.net/archives/category/concept" rel="category tag">개념</a>, <a href="https://mytory.net/archives/category/frontend" rel="category tag">프론트엔드</a>                        <small>|</small> <a href="https://mytory.net/archives/9727" rel="bookmark" title="[번역] CSS 수직 가운데 정렬 (테이블 없이!) Vertical Centering with CSS" onclick="prompt('URL을 복사하세요', this.href); return false;">URL</a>
+            </div>
+    <div class="post-share-to-sns  no-print"><ul class="share-icons nav">
+    <li>
+        <a target="_blank" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;text=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS&amp;url=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;via=mytory&amp;related=mytory" title="Share on Twitter">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="151.084 151.084 24 24" enable-background="new 151.084 151.084 24 24" xml:space="preserve">
+                <circle fill="#35495E" cx="163.084" cy="163.084" r="12"></circle>
+                <path fill="#ECF0F1" d="M170.233,158.734c-0.516,0.229-1.071,0.383-1.653,0.452c0.594-0.355,1.051-0.92,1.266-1.592
+	c-0.557,0.329-1.172,0.569-1.828,0.698c-0.525-0.56-1.272-0.909-2.1-0.909c-1.591,0-2.879,1.288-2.879,2.878
+	c0,0.226,0.025,0.445,0.075,0.655c-2.393-0.119-4.513-1.266-5.933-3.007c-0.248,0.425-0.39,0.919-0.39,1.446
+	c0,0.999,0.509,1.88,1.281,2.396c-0.473-0.016-0.916-0.145-1.305-0.36c0,0.012,0,0.023,0,0.037c0,1.395,0.992,2.557,2.31,2.821
+	c-0.241,0.065-0.496,0.101-0.759,0.101c-0.186,0-0.365-0.018-0.541-0.051c0.366,1.144,1.429,1.976,2.688,1.999
+	c-0.985,0.771-2.227,1.232-3.575,1.232c-0.231,0-0.461-0.014-0.686-0.041c1.273,0.817,2.786,1.293,4.411,1.293
+	c5.294,0,8.189-4.386,8.189-8.188c0-0.125-0.003-0.249-0.009-0.372C169.359,159.818,169.848,159.312,170.233,158.734z"></path>
+            </svg>
+    </a></li><a target="_blank" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;text=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS&amp;url=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;via=mytory&amp;related=mytory" title="Share on Twitter">
+    </a><li><a target="_blank" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;text=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS&amp;url=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;via=mytory&amp;related=mytory" title="Share on Twitter">
+        </a><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;t=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS" title="Share on Facebook">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="152.619 152.619 24 24" enable-background="new 152.619 152.619 24 24" xml:space="preserve">
+                <circle fill="#35495E" cx="164.619" cy="164.619" r="12"></circle>
+                <path id="f" fill="#ECF0F1" d="M165.838,172.495v-7.186h2.412l0.361-2.8h-2.772v-1.788c0-0.812,0.226-1.363,1.388-1.363h1.482
+	v-2.504c-0.257-0.035-1.137-0.111-2.16-0.111c-2.139,0-3.602,1.306-3.602,3.702v2.064h-2.418v2.8h2.418v7.186H165.838z"></path>
+            </svg>
+
+        </a>
+    </li>
+            <li>
+            <a class="js-print-layout" href="https://mytory.net/archives/9727?print=yes" title="인쇄">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                    <circle fill="#35495E" cx="12" cy="12" r="12"></circle>
+                    <path fill="#ECF0F1" d="M16.375,8.132c0-0.854,0-1.993,0-3.132c-2.917,0-5.833,0-8.75,0c0,1.096,0,2.19,0,3.149
+	C6.688,8.691,5.844,9.179,5,9.667c0,2.431,0,4.86,0,7.292c0.83,0.167,1.659,0.333,2.625,0.527c0,0.478,0,0.995,0,1.514
+	c2.917,0,5.833,0,8.75,0c0-0.519,0-1.036,0-1.514c0.966-0.193,1.796-0.36,2.625-0.527c0-2.432,0-4.861,0-7.292
+	C18.196,9.197,17.396,8.729,16.375,8.132z M7.591,16.47c-0.597-0.154-1.159-0.196-1.58-0.463c-0.168-0.104-0.146-0.962,0.004-1.034
+	c0.456-0.222,1.018-0.229,1.576-0.325C7.591,15.336,7.591,15.766,7.591,16.47z M15.463,18.019c-2.273,0-4.524,0-6.873,0
+	c0-1.029,0-2.073,0-3.24c2.22,0,4.468,0,6.873,0C15.463,15.887,15.463,16.9,15.463,18.019z M15.488,10.154c-2.274,0-4.527,0-6.899,0
+	c0-1.323,0-2.695,0-4.174c2.252,0,4.503,0,6.899,0C15.488,7.426,15.488,8.731,15.488,10.154z M18.003,15.969
+	c-0.359,0.298-0.901,0.374-1.572,0.611c0-0.818,0-1.282,0-1.954c0.571,0.101,1.111,0.085,1.513,0.315
+	C18.119,15.043,18.171,15.83,18.003,15.969z"></path>
+                    <path fill="#ECF0F1" d="M14.58,16.777c-1.06-0.61-4.353-0.563-5.17,0.073C10.477,17.46,13.773,17.415,14.58,16.777z"></path>
+                </svg>
+            </a>
+        </li>
+    </ul>
+</div>
+
+    <div class="content entry-content">
+        <h2 id="2017-01-05">2017-01-05</h2>
+<p>이제는 세월이 흘러 IE8 지원도 하지 않는 곳이 많아졌다. IE6까지 지원하느라 고생했던 것을 생각하면 격세지감이다. 하지만 여전히 아래 기법들은 유효하다. (IE5~6을 지원하기 위한 코드 자체를 제외하면.)</p>
+<p><code>display: flex</code>를 대부분의 브라우저에서 사용할 수 있게 된 것도 희소식이다. 수직 가운데 정렬이 훨씬 편해졌다. 다만 IE9이 이걸 지원하지 않는다는 점이 문제다.</p>
+<p>이 글은 2009년에 나온 글이라 플렉스박스에 대한 설명은 없다. <code>display: flex</code>를 이용한 기법을 간단하게 살펴 보고 싶다면 <a href="https://www.jakpsatweb.cz/css/css-vertical-center-solution.html">Vertical Centering in CSS</a>를 참고하라.</p>
+<p>기본적으로 flexbox를 이용한 수직 가운데 정렬은 아래 코드를 이용하면 된다. (2021년 6월 4일에 추가함.)</p>
+<pre><code class="language-css hljs"><span class="hljs-selector-class">.flex-container</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: center;
+}
+</code></pre>
+<hr>
+<p>원문은 CSS로 수직 가운데 정렬 하기(Vertical Centering with CSS)다.<sup id="fnref:improvement" role="doc-noteref"><a href="improvement" class="footnote" rel="footnote">1</a></sup><sup id="fnref:original" role="doc-noteref"><a href="original" class="footnote" rel="footnote">2</a></sup> 2009년 2월 말에 씌어졌고, 이 때는 아직 IE8 베타 버전만 나와있던 때다. IE8 정식 버전은 2009년 3월 19일에 출시됐다.</p>
+<hr>
+<p>CSS로 요소를 수직 가운데 정렬하는 몇 가지 방법이 있다. 하지만 적당한 걸 고르기는 힘들다. 나는 내가 본 것 중에 최고의 방법을 보여 주겠다. 수직 가운데로 잘 정렬된 간단한 웹사이트를 만드는 방법도 보여 주겠다.</p>
+<p>CSS로 수직 가운데 정렬을 하는 것은 쉽지 않다. 서로 다른 방법들이 있고, 어떤 방법은 몇몇 브라우저에서는 작동하지 않는다. CSS를 다룰 때, 작동이 어떻게 되는지 아는 것은 중요하다. 그러니 요소를 수직 가운데 정렬하는 5가지 방법을 살펴 보자. 그리고 장단점을 살펴 보자. (각 방법을 간략하게 요약 설명한 <a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo4.html">테스트 페이지</a>를 볼 수 있다.</p>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/demo-thumb.jpg" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/demo-thumb.jpg" alt="" data-was-processed="true"></p>
+<p><a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo4.html">(테스트 페이지 보기)</a></p>
+<p>일러 두기: 나는 오스트레일리아인이다. 그래서 center라고 쓰지 않고 centre라고 쓴다. css에서는 cent<strong>er</strong>라고 써야 하니 헷갈리지 말기 바란다.</p>
+<h2 id="방법-1">방법 1</h2>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method1.gif" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method1.gif" alt="" data-was-processed="true"></p>
+<p><a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo4.html">(테스트 페이지 보기)</a></p>
+<p>이 방법은 테이블처럼 만들어서 테이블의 <code>vertical-align</code> 속성을 사용할 수 있도록 <code>&lt;div&gt;</code>를 몇 개 세팅한다. (테이블의 <code>vertical-align</code> 속성은 다른 요소들에서는 <a href="http://phrogz.net/CSS/vertical-align/index.html">굉장히 다르게</a> 작동한다.)</p>
+<p>일러 두기: 아마 “테이블을 사용하려던 건 아닌데” 하고 생각할지 모르겠다. 테이블을 사용할 때 주된 문제는 마크업을 시멘틱하게 유지해야 한다는 것이다. 테이블 코드를 짜지만 그게 사실 진짜 표는 아닌 경우, 테이블로 코딩하지 말아야 한다. (실제 표인 경우엔 테이블을 사용해도 아무 문제 없다.) <code>&lt;div&gt;</code>를 테이블로 생각하게 만들어서 생기는 유일한 문제는 브라우저가 일관되게 작동하지 못하게 된다는 점이다. 이건 미친 짓은 아니다. <code>a</code>에 <code>display:block;</code>을 주거나 <code>&lt;h2&gt;</code>에 <code>display:inline;</code>을 주는 것과 비슷한 것뿐이다.</p>
+<p>[역자 주 – 한 줄에 여러 요소를 넣어야 할 때는 <code>display: table</code> 대신 <code>display: inline-table</code>을 사용할 수도 있다.]</p>
+<pre>&lt;div id="wrapper"&gt;
+  &lt;div id="cell"&gt;
+    &lt;div&gt;
+      Content goes here
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+<pre>#wrapper {
+  display: table;
+}
+#cell {
+  display: table-cell; 
+  vertical-align: middle;
+}</pre>
+<h3 id="장점">장점</h3>
+<ul>
+<li>높이가 변해도 상관없다. (CSS에 높이를 지정하지 않아도 된다.)</li>
+<li>wrapper에 공간이 없어도 내용이 잘리지 않는다.</li>
+</ul>
+<h3 id="단점">단점</h3>
+<ul>
+<li>인터넷 익스플로러에서 작동하지 않는다. (심지어 IE8 베타에서도.)</li>
+<li>태그 단계가 깊어진다. (그렇게 나쁜 건 아니다. 이건 주관적인 부분이다.)</li>
+</ul>
+<h2 id="방법-2">방법 2</h2>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method2.gif" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method2.gif" alt="" data-was-processed="true"></p>
+<p><a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo4.html">(테스트 페이지 보기)</a></p>
+<p>이 방법은 <code>position</code> <code>absolute</code>를 사용한다. <code>top</code>을 50%로 설정하고 <code>margin-top</code>을 콘텐츠 높이 절반만큼 음수로 설정한다. 이것은 요소의 높이를 CSS에서 지정해야 한다는 걸 의미한다.</p>
+<p>높이를 지정해 두기 때문에, 내용이 넘치면 <code>div</code> 밖으로 튀어나간다. 대신에 스크롤바가 생기도록 콘텐츠 <code>div</code>에 <code>overflow:auto;</code>를 주고 싶을 것이다.</p>
+<pre>&lt;div id="content"&gt;
+  Content Here    
+&lt;/div&gt;</pre>
+<pre>#content {
+  position: absolute; 
+  top: 50%; 
+  height: 240px; 
+  margin-top: -120px; /* 높이의 절반을 음수 마진으로 */
+}</pre>
+<h3 id="장점-1">장점</h3>
+<ul>
+<li>모든 브라우저에서 작동한다.</li>
+<li>태그가 깊이 들어가지 않는다.</li>
+</ul>
+<h3 id="단점-1">단점</h3>
+<ul>
+<li>충분한 공간이 없으면 내용이 잘린다. (div가 body 밑에 있고, 사용자가 브라우저 창을 줄이면, 스크롤바가 나타나지 않는다.)</li>
+</ul>
+<h2 id="방법-3">방법 3</h2>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method3.gif" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method3.gif" alt="" data-was-processed="true"></p>
+<p><a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo4.html">(테스트 페이지 보기)</a></p>
+<p>이 방법은 내용 요소 위에 <code>div</code>를 두는 방법이다. 이 <code>div</code>는 <code>height: 50%;</code>, <code>margin-bottom: -content높이의절반;</code> 이렇게 설정한다. content엔 <code>clear</code> 속성을 줘서 <code>float</code>된 <code>div</code> 밑으로 오게 하면 content가 가운데 오게 된다.</p>
+<pre>&lt;div id="floater"&gt;&lt;/div&gt;
+&lt;div id="content"&gt;
+  Content Here    
+&lt;/div&gt;</pre>
+<pre>#floater {
+  float: left; 
+  height: 50%; 
+  margin-bottom: -120px;
+}
+#content  {
+  clear: both; 
+  height: 240px; 
+  position: relative;
+}</pre>
+<h3 id="장점-2">장점</h3>
+<ul>
+<li>모든 브라우저에서 작동한다.</li>
+<li>충분한 공간이 없을 때 (예컨대 윈도우 사이즈를 줄일 때) 콘텐츠가 잘리고 스크롤바가 나타난다.</li>
+</ul>
+<h3 id="단점-2">단점</h3>
+<ul>
+<li>내가 생각할 수 있는 유일한 단점은, 빈 요소가 사용된다는 점이다. (그렇게 나쁜 건 아니다. 이것 역시 주관적인 부분이다.)</li>
+</ul>
+<h2 id="방법-4">방법 4</h2>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method4.gif" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method4.gif" alt="" data-was-processed="true"></p>
+<p><a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo4.html">(테스트 페이지 보기)</a></p>
+<p>이 방법은 높이와 너비를 지정하고 <code>position: absolute;</code>를 매긴 <code>div</code>를 사용한다. <code>div</code>는 그러면 <code>top: 0;</code>부터 <code>bottom: 0;</code>까지 뻗는다. 근데 사실 높이를 지정해 뒀기 때문에 그게 가능하진 않다. 그래서 <code>margin: auto;</code> 라고 주면 요소가 가운데로 가게 된다. 이건 우리가 흔히 블럭 요소에 <code>margin: 0 auto;</code> 를 적용해서 사용하는 수평 가운데 정렬과 아주 비슷하다.</p>
+<pre>&lt;div id="content"&gt;
+  Content Here    
+&lt;/div&gt;</pre>
+<pre>#content {
+  position: absolute; 
+  top: 0; 
+  bottom: 0; 
+  left: 0; 
+  right: 0;
+  margin: auto; 
+  height: 240px; 
+  width: 70%;
+}</pre>
+<h3 id="장점-3">장점</h3>
+<ul>
+<li>쉽다</li>
+</ul>
+<h3 id="단점-3">단점</h3>
+<ul>
+<li>인터넷 익스플로러에서 작동하지 않는다. (심지어 IE8 베타에서도.)</li>
+<li>컨테이너에 공간이 없으면 내용이 스크롤바 없이 잘린다.</li>
+</ul>
+<h2 id="방법-5">방법 5</h2>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method5.gif" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/images/method5.gif" alt="" data-was-processed="true"></p>
+<p><a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo4.html">(테스트 페이지 보기)</a></p>
+<p>이 방법은 오직 한 줄짜리 텍스트만 수직 가운데 정렬을 해 준다. 간단히,  <code>line-height</code>를 요소의 높이로 설장한다. 그러면 텍스트가 가운데로 간다.</p>
+<pre>&lt;div id="content"&gt;
+  Content
+&lt;/div&gt;</pre>
+<pre>#content {
+  height:100px; 
+  line-height: 100px;
+}</pre>
+<h3 id="장점-4">장점</h3>
+<ul>
+<li>모든 브라우저에서 작동한다.</li>
+<li>공간이 없어도 잘리지 않는다.</li>
+</ul>
+<h3 id="단점-4">단점</h3>
+<ul>
+<li>오직 텍스트에서만 작동한다. (블럭 요소에선 작동하지 않는다.)</li>
+<li>한 줄 이상이 되면 (즉, 두 줄이 되면), 보기 싫게 깨진다.</li>
+</ul>
+<p>이 방법은 버튼이나 한 줄짜리 텍스트 필드를 수직 가운데 정렬해야 하는 경우처럼 작은 요소들에 사용하기 유용하다.</p>
+<h2 id="어떤-방법을-사용할까">어떤 방법을 사용할까?</h2>
+<p>내가 좋아하는 방법은 3번째 방법 — <code>float</code>시킨 요소와 <code>clear</code>를 적용한 콘텐츠를 사용하는 방법이다. 이 방법엔 치명적인 결점이 하나도 없다. 콘텐츠가 <code>clear: both;</code>돼 있으니, 우리는 다른 요소를 그 위에 얹을 수도 있다. 그리고 윈도우가 접혀도 콘텐츠가 그 위를 덮지 않는다. <a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo5.html">데모</a>를 봐라.</p>
+<pre>&lt;div id="top"&gt;
+  &lt;h1&gt;Title&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id="floater"&gt;&lt;/div&gt;
+&lt;div id="content"&gt;
+  Content Here    
+&lt;/div&gt;</pre>
+<pre>#floater {
+  float: left; 
+  height: 50%; 
+  margin-bottom: -120px;
+}
+#top {
+  float: right; 
+  width: 100%; 
+  text-align: center;
+}
+#content {
+  clear: both; 
+  height: 240px; 
+  position: relative;
+}</pre>
+<p>이제 어떻게 작동하는지 감이 잡힐 거다. 간단하지만 흥미로운 웹사이트를 만들어 보자! 최종 결과물은 아래처럼 보일 거다.</p>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/step4-thumb.jpg" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/step4-thumb.jpg" alt="" data-was-processed="true"><a href="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/demo/demo.html">6</a></p>
+<h2 id="스텝-1">스텝 1</h2>
+<p>시멘틱한 마크업으로 시작하는 건 늘 좋은 일이다. 이것은 우리가 만들 페이지의 구조를 보여 준다.</p>
+<ul>
+<li><code>#floater</code> (콘텐츠를 수직 가운데로 밀어내기 위한 요소)</li>
+<li><code>#centered</code> (수직 가운데 정렬할 박스)
+<ul>
+<li><code>#side</code>
+<ul>
+<li><code>#logo</code></li>
+<li><code>#nav</code> (순서 없는 목록 <code>&lt;ul&gt;</code>)</li>
+</ul>
+</li>
+<li><code>#content</code></li>
+</ul>
+</li>
+<li><code>#bottom</code> (저작권 등)</li>
+</ul>
+<p>이건 내가 사용할 xhtml 코드다.</p>
+<pre>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /&gt;
+  &lt;title&gt;A Centred Company&lt;/title&gt;
+  &lt;link rel="stylesheet" href="styles.css" type="text/css" media="all" /&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;div id="floater"&gt;&lt;/div&gt;
+  &lt;div id="centered"&gt;
+
+    &lt;div id="side"&gt;
+      &lt;div id="logo"&gt;&lt;strong&gt;&lt;span&gt;A&lt;/span&gt; Company&lt;/strong&gt;&lt;/div&gt;
+      &lt;ul id="nav"&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Products&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;div id="content"&gt;
+
+      &lt;h1&gt;Page Title&lt;/h1&gt;
+
+      &lt;p&gt;
+      Holisticly re-engineer value-added outsourcing after process-centric collaboration and idea-sharing. 
+      Energistically simplify impactful niche markets via enabled imperatives. 
+      Holisticly predominate premium innovation after compelling scenarios. 
+      Seamlessly recaptiualize high standards in human capital with leading-edge manufactured products. 
+      Distinctively syndicate standards compliant schemas before robust vortals. 
+      Uniquely recaptiualize leveraged web-readiness vis-a-vis out-of-the-box information. 
+      &lt;/p&gt;
+
+      &lt;h2&gt;Heading 2&lt;/h2&gt;
+
+      &lt;p&gt;
+      Efficiently embrace customized web-readiness rather than customer directed processes. 
+      Assertively grow cross-platform imperatives vis-a-vis proactive technologies. 
+      Conveniently empower multidisciplinary meta-services without enterprise-wide interfaces. 
+      Conveniently streamline competitive strategic theme areas with focused e-markets. 
+      Phosfluorescently syndicate world-class communities vis-a-vis value-added markets. 
+      Appropriately reinvent holistic services before robust e-services. 
+      &lt;/p&gt;
+
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+  &lt;div id="bottom"&gt;
+    &lt;p&gt;
+      Copyright notice goes here
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<h2 id="스텝-2">스텝 2</h2>
+<p>페이지 레이아웃을 잡기 위해 기본적인 CSS를 잡는다. 이걸 <code>styles.css</code>에 넣는다. 스타일은 html 맨 위쪽에 연결해 뒀다.</p>
+<pre>html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background: url('page_bg.jpg') 50% 50% no-repeat #FC3;
+    font-family: Georgia, Times, serifs;
+}
+
+#floater {
+    position: relative;
+    float: left;
+    height: 50%;
+    margin-bottom: -200px;
+    width: 1px;
+}
+
+#centered {
+    position: relative;
+    clear: left;
+    height: 400px;
+    width: 80%;
+    max-width: 800px;
+    min-width: 400px;
+    margin: 0 auto;
+    background: #fff;
+    border: 4px solid #666;
+}
+
+#bottom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 70%;
+    padding: 20px;
+    margin: 10px;
+}
+
+#content {
+    position: absolute;
+    left: 30%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+    height: 340px;
+    padding: 20px;
+    margin: 10px;
+}</pre>
+<p>콘텐츠를 수직으로 가운데 정렬하도록 만들기 위해서는 <code>body</code>와 <code>html</code>의 높이가 100%여야 한다. 높이는 <code>padding</code>과 <code>margin</code> 안쪽에 들어가는 것이니, <code>padding</code>과 <code>margin</code>은 0으로 해야 한다. 안 그러면 작은 <code>margin</code>을 보여 주려고 스크롤바가 나타난다.</p>
+<p><code>float</code>시킨 요소의 <code>margin-bottom</code>은 콘텐츠 높이(<code>400px</code>)의 절반인 <code>-200px</code>이다.</p>
+<p>아래처럼 보여야 한다.</p>
+<p><img class="lazy loaded" decoding="async" src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/step2-thumb.jpg" data-src="https://raw.githubusercontent.com/mytory/mytory.github.io/master/uploads/legacy/css-absolute-center/tutorial/step2-thumb.jpg" alt="" data-was-processed="true"></p>
+<p><code>#centered</code>의 너비는 80%다. 이렇게 하면 작은 스크린에서는 웹사이트가 작게 표현되고, 큰 스크린에서는 웹사이트가 크게 표현된다. (내 스크린은 약간 큰데, 낡은 웹사이트들 상당수가 좌측 상단 코너에 조그맣게 표현된다. 좀 짜증난다.) 이것은 유동 레이아웃으로 알려진 것이다. <code>min-width</code>와 <code>max-width</code>가 너무 커지거나 너무 작아지는 것을 막아 준다. Internet Explorer는 min&amp;max width를 지원하지 않는다. 그렇긴 하지만 전용 <code>expression</code> 값을 이용해서 나중에 수정할 것이다. 당연히, 이렇게 하는 대신에 고정폭을 선택할 수도 있다.</p>
+<p><code>#centered</code>가 <code>position: relative</code>기 때문에, 우리는 그 안에 요소를 배치할 때 absolute position 요소를 사용할 수 있다. <code>overflow: auto;</code> 가 <code>#content</code>에 적용됐기 때문에, 내용이 넘치면 스크롤바가 나타날 것이다. Internet Explorer는 <code>overflow: auto;</code>를 좋아하지 않는다. 우리가 높이를 말해 주기 전까지는 말이다. (단지 <code>top</code>과 <code>bottom</code> 위치를 지정하는 것으론 안 된다. 그리고 높이를 %로 지정해도 안 된다.)<sup id="fnref:percent" role="doc-noteref"><a href="percent" class="footnote" rel="footnote">3</a></sup> 그래서 그렇게 했다.</p>
+<h2 id="스텝-3">스텝 3</h2>
+<p>마지막으로 할 것은 스타일을 추가해서 좀더 예쁘게 만드는 거다. 메뉴를 다듬어 보자.</p>
+<pre>#nav ul {<br>
+    list-style: none;<br>
+    padding: 0;<br>
+    margin: 20px 0 0 0;<br>
+    text-indent: 0;<br>
+}<p></p>
+<p>#nav li {<br>
+    padding: 0;<br>
+    margin: 3px;<br>
+}</p>
+<p>#nav li a {<br>
+    display: block;<br>
+    background-color: #e8e8e8;<br>
+    padding: 7px;<br>
+    margin: 0;<br>
+    text-decoration: none;<br>
+    color: #000;<br>
+    border-bottom: 1px solid #bbb;<br>
+    text-align: right;<br>
+}</p>
+<p>#nav li a::after {<br>
+    content: '</p>
+    </pre></div>
+
+    <div class="post-share-to-sns  no-print"><ul class="share-icons nav">
+    <li>
+        <a target="_blank" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;text=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS&amp;url=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;via=mytory&amp;related=mytory" title="Share on Twitter">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="151.084 151.084 24 24" enable-background="new 151.084 151.084 24 24" xml:space="preserve">
+                <circle fill="#35495E" cx="163.084" cy="163.084" r="12"></circle>
+                <path fill="#ECF0F1" d="M170.233,158.734c-0.516,0.229-1.071,0.383-1.653,0.452c0.594-0.355,1.051-0.92,1.266-1.592
+	c-0.557,0.329-1.172,0.569-1.828,0.698c-0.525-0.56-1.272-0.909-2.1-0.909c-1.591,0-2.879,1.288-2.879,2.878
+	c0,0.226,0.025,0.445,0.075,0.655c-2.393-0.119-4.513-1.266-5.933-3.007c-0.248,0.425-0.39,0.919-0.39,1.446
+	c0,0.999,0.509,1.88,1.281,2.396c-0.473-0.016-0.916-0.145-1.305-0.36c0,0.012,0,0.023,0,0.037c0,1.395,0.992,2.557,2.31,2.821
+	c-0.241,0.065-0.496,0.101-0.759,0.101c-0.186,0-0.365-0.018-0.541-0.051c0.366,1.144,1.429,1.976,2.688,1.999
+	c-0.985,0.771-2.227,1.232-3.575,1.232c-0.231,0-0.461-0.014-0.686-0.041c1.273,0.817,2.786,1.293,4.411,1.293
+	c5.294,0,8.189-4.386,8.189-8.188c0-0.125-0.003-0.249-0.009-0.372C169.359,159.818,169.848,159.312,170.233,158.734z"></path>
+            </svg>
+    </a></li><a target="_blank" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;text=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS&amp;url=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;via=mytory&amp;related=mytory" title="Share on Twitter">
+    </a><li><a target="_blank" href="https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;text=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS&amp;url=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;via=mytory&amp;related=mytory" title="Share on Twitter">
+        </a><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmytory.net%2Farchives%2F9727&amp;t=%5B%EB%B2%88%EC%97%AD%5D+CSS+%EC%88%98%EC%A7%81+%EA%B0%80%EC%9A%B4%EB%8D%B0+%EC%A0%95%EB%A0%AC+%28%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%97%86%EC%9D%B4%21%29+Vertical+Centering+with+CSS" title="Share on Facebook">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="152.619 152.619 24 24" enable-background="new 152.619 152.619 24 24" xml:space="preserve">
+                <circle fill="#35495E" cx="164.619" cy="164.619" r="12"></circle>
+                <path id="f" fill="#ECF0F1" d="M165.838,172.495v-7.186h2.412l0.361-2.8h-2.772v-1.788c0-0.812,0.226-1.363,1.388-1.363h1.482
+	v-2.504c-0.257-0.035-1.137-0.111-2.16-0.111c-2.139,0-3.602,1.306-3.602,3.702v2.064h-2.418v2.8h2.418v7.186H165.838z"></path>
+            </svg>
+
+        </a>
+    </li>
+            <li>
+            <a class="js-print-layout" href="https://mytory.net/archives/9727?print=yes" title="인쇄">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                    <circle fill="#35495E" cx="12" cy="12" r="12"></circle>
+                    <path fill="#ECF0F1" d="M16.375,8.132c0-0.854,0-1.993,0-3.132c-2.917,0-5.833,0-8.75,0c0,1.096,0,2.19,0,3.149
+	C6.688,8.691,5.844,9.179,5,9.667c0,2.431,0,4.86,0,7.292c0.83,0.167,1.659,0.333,2.625,0.527c0,0.478,0,0.995,0,1.514
+	c2.917,0,5.833,0,8.75,0c0-0.519,0-1.036,0-1.514c0.966-0.193,1.796-0.36,2.625-0.527c0-2.432,0-4.861,0-7.292
+	C18.196,9.197,17.396,8.729,16.375,8.132z M7.591,16.47c-0.597-0.154-1.159-0.196-1.58-0.463c-0.168-0.104-0.146-0.962,0.004-1.034
+	c0.456-0.222,1.018-0.229,1.576-0.325C7.591,15.336,7.591,15.766,7.591,16.47z M15.463,18.019c-2.273,0-4.524,0-6.873,0
+	c0-1.029,0-2.073,0-3.24c2.22,0,4.468,0,6.873,0C15.463,15.887,15.463,16.9,15.463,18.019z M15.488,10.154c-2.274,0-4.527,0-6.899,0
+	c0-1.323,0-2.695,0-4.174c2.252,0,4.503,0,6.899,0C15.488,7.426,15.488,8.731,15.488,10.154z M18.003,15.969
+	c-0.359,0.298-0.901,0.374-1.572,0.611c0-0.818,0-1.282,0-1.954c0.571,0.101,1.111,0.085,1.513,0.315
+	C18.119,15.043,18.171,15.83,18.003,15.969z"></path>
+                    <path fill="#ECF0F1" d="M14.58,16.777c-1.06-0.61-4.353-0.563-5.17,0.073C10.477,17.46,13.773,17.415,14.58,16.777z"></path>
+                </svg>
+            </a>
+        </li>
+    </ul>
+</div>
+
+        <div class="c-bottom-about  no-print">
+        <div class="c-bottom-about__img-and-name">
+            <a href="/about">
+                <img class="lazy" style="border-radius: 9999px;" decoding="async" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20125%20125'%3E%3C/svg%3E" data-src="https://www.gravatar.com/avatar/863f21b65f61e50b78dc46771644e8fa?s=125" alt="" width="125" height="125">
+                <br>
+                안형우            </a>
+        </div>
+        <p>안녕하세요. 14년차 풀스택 웹개발자 안형우입니다. 이 블로그에서는 WordPress, PHP, CSS, 사용성, 리눅스 서버 등 풀스택 웹개발에서 마주하는 다양한 문제 상황과 해결책, 필요한 개념들을 다룹니다. <a href="/about"><img draggable="false" role="img" class="emoji" alt="👉" src="https://s.w.org/images/core/emoji/14.0.0/svg/1f449.svg"> 소개</a></p>
+<hr>
+<p><strong>작업물</strong></p>
+<ul>
+<li><a href="/archives/13549">인프런 워드프레스 개발 강의</a></li>
+<li><a href="/archives/tag/my-wordpress-plugin">워드프레스 플러그인</a></li>
+<li><a href="/archives/13185">OOCSS 발표</a></li>
+<li><a href="https://www.evecondoms.com/sex_mind_test/">이브 퀴즈 웹앱</a></li>
+</ul>    </div>
+
+    <div class="post-meta post-nav  no-print">
+        <ul>
+            <li>Next ↑ : <a href="https://mytory.net/archives/9807" rel="next">[jQuery] ajax 통신 결과를 받아서 그 다음 작업 수행하기 <small class="date">(2013/03/27)</small></a></li>            <li>Prev ↓ : <a href="https://mytory.net/archives/9695" rel="prev">Eclipse PDT(PHP Development Tool) 설치, 내가 선호하는 설치 방법과 플러그인, 그리고 플러그인 설치 방법 <small class="date">(2013/03/22)</small></a></li>        </ul>
+    </div><!-- .entry-meta -->
+
+    
+<div id="comments" class="comments-area  no-print">
+
+    
+    	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">답글 남기기 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/archives/9727#respond" style="display:none;">응답 취소</a></small></h3><form action="https://mytory.net/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">이메일 주소는 공개되지 않습니다.</span> <span class="required-field-message">필수 필드는 <span class="required">*</span>로 표시됩니다</span></p><p class="comment-form-comment"><label for="comment">댓글 <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">이름 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required"></p>
+<p class="comment-form-email"><label for="email">이메일 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required"></p>
+<p class="comment-form-url"><label for="url">웹사이트</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">다음 번 댓글 작성을 위해 이 브라우저에 이름, 이메일, 그리고 웹사이트를 저장합니다.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="댓글 달기"> <input type="hidden" name="comment_post_ID" value="9727" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="22f7db5bac"></p><p style="display: none !important;"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="1683160553866"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+</div>
